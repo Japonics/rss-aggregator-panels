@@ -3,14 +3,14 @@ import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot} from '@angular
 import {AuthManagerService} from '../services/auth-manager.service';
 
 @Injectable()
-export class IsAuthorizedGuard implements CanActivate {
+export class IsAdminGuard implements CanActivate {
 
   constructor(private _authManagerService: AuthManagerService) {}
 
 
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     return new Promise(((resolve) => {
-      this._authManagerService.isAuthorized()
+      this._authManagerService.isAdmin()
         .then(
           () => resolve(true),
           () => resolve(false)

@@ -1,11 +1,10 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-/**
- * Components
- */
 import {UserPanelOutletComponent} from './user-panel/components/user-panel-outlet/user-panel-outlet.component';
 import {AdminPanelOutletComponent} from './admin-panel/components/admin-panel-outlet/admin-panel-outlet.component';
 import {AuthOutletComponent} from './auth/components/auth-outlet/auth-outlet.component';
+import {IsAuthorizedGuard} from './core/guards/is-authorized.guard';
+import {IsAdminGuard} from './core/guards/is-admin.guard';
 
 const routes: Routes = [
     {
@@ -15,11 +14,13 @@ const routes: Routes = [
     {
       path: '',
       component: UserPanelOutletComponent,
+      canActivate: [IsAuthorizedGuard],
       children: []
     },
     {
       path: 'admin',
       component: AdminPanelOutletComponent,
+      canActivate: [IsAuthorizedGuard, IsAdminGuard],
       children: []
     }
   ]

@@ -1,0 +1,16 @@
+<div class="form-wrapper">
+  <header class="app-intro">
+    RSS Aggregator
+  </header>
+  <div class="form-container">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <label>
+        First Name:
+        <input type="text" formControlName="firstName">
+      </label>
+      <button type="submit" [disabled]="!loginForm.valid">
+        Zaloguj
+      </button>
+    </form>
+  </div>
+</div>

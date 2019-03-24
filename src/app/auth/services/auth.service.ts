@@ -5,9 +5,10 @@ import {catchError, map} from 'rxjs/operators';
 import {IUser} from '../interfaces/user.interface';
 import {IUserDto} from '../interfaces/user-dto.interface';
 import {ICredentials} from '../interfaces/credentials.interface';
+import {IAuthService} from '../interfaces/auth-service.interface';
 
 @Injectable()
-export class AuthService {
+export class AuthService implements IAuthService {
 
   constructor(private _httpClientService: HttpClientService) {
   }
