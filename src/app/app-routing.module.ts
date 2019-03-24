@@ -4,11 +4,13 @@ import {Routes, RouterModule} from '@angular/router';
  * Components
  */
 import {UserPanelOutletComponent} from './user-panel/components/user-panel-outlet/user-panel-outlet.component';
+import {AdminPanelOutletComponent} from './admin-panel/components/admin-panel-outlet/admin-panel-outlet.component';
+import {AuthOutletComponent} from './auth/components/auth-outlet/auth-outlet.component';
 
 const routes: Routes = [
     {
       path: 'login',
-      component: null
+      component: AuthOutletComponent
     },
     {
       path: '',
@@ -17,7 +19,7 @@ const routes: Routes = [
     },
     {
       path: 'admin',
-      component: null,
+      component: AdminPanelOutletComponent,
       children: []
     }
   ]

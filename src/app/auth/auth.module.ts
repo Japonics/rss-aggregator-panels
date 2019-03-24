@@ -5,6 +5,10 @@ import {NgModule} from '@angular/core';
  */
 import {UIModule} from '../ui/ui.module';
 
+/**
+ * Components
+ */
+
 @NgModule({
   imports: [
     UIModule
