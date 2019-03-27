@@ -1,13 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import "app/ui/styles/colors";
+@import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: 'Roboto', sans-serif;
+  outline: none;
 }
 
 html,
 body {
   padding: 0;
   margin: 0;
+}
+
+.mat-drawer-backdrop.mat-drawer-shown {
+  background-color: transparentize(#000, 0.5);
 }

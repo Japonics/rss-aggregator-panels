@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClientService} from '../../core/services/http-client.service';
-import {Observable, of} from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {IUser} from '../interfaces/user.interface';
 import {IUserDto} from '../interfaces/user-dto.interface';

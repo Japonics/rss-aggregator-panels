@@ -1,6 +1,8 @@
+@import 'ui/styles/colors';
+
 :host {
   display: flex;
   width: 100vw;
   height: 100vh;
-  background-color: #222;
+  background-color: $primary-background-color;
 }

@@ -6,6 +6,7 @@ import {AuthOutletComponent} from './auth/components/auth-outlet/auth-outlet.com
 import {IsAuthorizedGuard} from './core/guards/is-authorized.guard';
 import {IsAdminGuard} from './core/guards/is-admin.guard';
 import {LoginFormComponent} from './auth/components/login-form/login-form.component';
+import {ContentOutletComponent} from './core/components/content-outlet/content-outlet.component';
 
 const routes: Routes = [
     {
@@ -17,15 +18,22 @@ const routes: Routes = [
     },
     {
       path: '',
-      component: UserPanelOutletComponent,
+      component: ContentOutletComponent,
       canActivate: [IsAuthorizedGuard],
-      children: []
-    },
-    {
-      path: 'admin',
-      component: AdminPanelOutletComponent,
-      canActivate: [IsAuthorizedGuard, IsAdminGuard],
-      children: []
+      children: [
+        {
+          path: '',
+          component: UserPanelOutletComponent,
+          canActivate: [IsAuthorizedGuard],
+          children: []
+        },
+        {
+          path: 'admin',
+          component: AdminPanelOutletComponent,
+          canActivate: [IsAuthorizedGuard, IsAdminGuard],
+          children: []
+        }
+      ]
     }
   ]
 ;

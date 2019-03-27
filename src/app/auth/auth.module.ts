@@ -7,6 +7,7 @@ import {AuthMockService} from './services/auth-mock.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
+import {MatButtonModule, MatInputModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -14,7 +15,9 @@ import {RouterModule} from '@angular/router';
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    MatButtonModule,
+    MatInputModule
   ],
   providers: [
     AuthService,

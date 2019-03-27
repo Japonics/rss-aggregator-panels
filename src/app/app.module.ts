@@ -10,6 +10,9 @@ import {AppComponent} from './app.component';
 import {IsAdminGuard} from './core/guards/is-admin.guard';
 import {IsAuthorizedGuard} from './core/guards/is-authorized.guard';
 import {AuthManagerService} from './core/services/auth-manager.service';
+import {ContentOutletComponent} from './core/components/content-outlet/content-outlet.component';
+import {TopBarComponent} from './core/components/top-bar/top-bar.component';
+import {MatIconModule, MatSidenavModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -19,10 +22,14 @@ import {AuthManagerService} from './core/services/auth-manager.service';
     UIModule,
     AuthModule,
     AdminPanelModule,
-    UserPanelModule
+    UserPanelModule,
+    MatSidenavModule,
+    MatIconModule
   ],
   declarations: [
     AppComponent,
+    ContentOutletComponent,
+    TopBarComponent
   ],
   providers: [
     IsAdminGuard,

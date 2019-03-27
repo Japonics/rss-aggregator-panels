@@ -16,6 +16,14 @@ export class AuthManagerService {
     this._user = Object.assign({}, user);
   }
 
+  public logout(): Promise<boolean> {
+    return new Promise(((resolve) => {
+      localStorage.removeItem(USER_STORAGE_KEY);
+      this._user = null;
+      resolve(true);
+    }));
+  }
+
   public isAuthorized(): Promise<boolean> {
     return new Promise(((resolve, reject) => {
 

@@ -1,0 +1,55 @@
+<header>
+  <app-top-bar (onToggle)="toggle($event)"></app-top-bar>
+</header>
+<div class="content-wrapper">
+  <mat-drawer-container class="drawer-container">
+    <mat-drawer #drawer class="drawer">
+      <h1>
+        RSS Aggregator
+      </h1>
+      <h3>
+        Navigation
+      </h3>
+      <ul class="nav">
+        <li class="nav-item" [routerLink]="['/']" routerLinkActive="active">
+          <span class="nav-item-icon">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" class="icon" color="accent">
+              view_compact
+            </mat-icon>
+          </span>
+          <p class="nav-item-label">Dashboard</p>
+        </li>
+
+        <li class="nav-item" [routerLink]="['/favorites']" routerLinkActive="active">
+          <span class="nav-item-icon">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" class="icon" color="accent">
+              favorite
+            </mat-icon>
+          </span>
+          <p class="nav-item-label">Favorites</p>
+        </li>
+
+        <li *ngIf="isAdmin" class="nav-item" [routerLink]="['/']" routerLinkActive="active">
+          <span class="nav-item-icon">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" class="icon" color="accent">
+              settings
+            </mat-icon>
+          </span>
+          <p class="nav-item-label">Manage</p>
+        </li>
+
+        <li class="nav-item" (click)="logout()">
+          <span class="nav-item-icon">
+            <mat-icon aria-hidden="false" aria-label="Example home icon" class="icon" color="accent">
+              exit_to_app
+            </mat-icon>
+          </span>
+          <p class="nav-item-label">Logout</p>
+        </li>
+      </ul>
+    </mat-drawer>
+    <mat-drawer-content>
+      <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

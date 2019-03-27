@@ -1,0 +1,33 @@
+@import '../../../ui/styles/colors';
+
+:host {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+
+  .form-wrapper {
+    background-color: $secondary-background-color;
+    padding: 30px 50px;
+    height: 250px;
+
+    .app-intro {
+      font-size: 28px;
+      color: $primary-theme-color;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .form-container {
+      form {
+        display: flex;
+        flex-direction: column;
+        input {
+          color: $primary-font-color;
+        }
+      }
+    }
+  }
+}

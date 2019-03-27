@@ -4,12 +4,11 @@
   </header>
   <div class="form-container">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <label>
-        First Name:
-        <input type="text" formControlName="firstName">
-      </label>
-      <button type="submit" [disabled]="!loginForm.valid">
-        Zaloguj
+      <mat-form-field>
+        <input matInput formControlName="username" placeholder="Username"/>
+      </mat-form-field>
+      <button type="submit" [disabled]="!loginForm.valid" mat-raised-button>
+        Log in
       </button>
     </form>
   </div>
