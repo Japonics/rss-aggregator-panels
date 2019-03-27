@@ -5,11 +5,15 @@ import {AdminPanelOutletComponent} from './admin-panel/components/admin-panel-ou
 import {AuthOutletComponent} from './auth/components/auth-outlet/auth-outlet.component';
 import {IsAuthorizedGuard} from './core/guards/is-authorized.guard';
 import {IsAdminGuard} from './core/guards/is-admin.guard';
+import {LoginFormComponent} from './auth/components/login-form/login-form.component';
 
 const routes: Routes = [
     {
       path: 'login',
-      component: AuthOutletComponent
+      component: AuthOutletComponent,
+      children: [
+        {path: '', component: LoginFormComponent}
+      ]
     },
     {
       path: '',

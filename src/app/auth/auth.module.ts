@@ -4,10 +4,17 @@ import {AuthOutletComponent} from './components/auth-outlet/auth-outlet.componen
 import {LoginFormComponent} from './components/login-form/login-form.component';
 import {AuthService} from './services/auth.service';
 import {AuthMockService} from './services/auth-mock.service';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   imports: [
-    UIModule
+    UIModule,
+    FormsModule,
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule
   ],
   providers: [
     AuthService,
