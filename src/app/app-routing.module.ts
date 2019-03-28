@@ -7,6 +7,8 @@ import {IsAuthorizedGuard} from './core/guards/is-authorized.guard';
 import {IsAdminGuard} from './core/guards/is-admin.guard';
 import {LoginFormComponent} from './auth/components/login-form/login-form.component';
 import {ContentOutletComponent} from './core/components/content-outlet/content-outlet.component';
+import {CategoriesListComponent} from './user-panel/components/categories-list/categories-list.component';
+import {NewsListComponent} from './user-panel/components/news-list/news-list.component';
 
 const routes: Routes = [
     {
@@ -25,7 +27,10 @@ const routes: Routes = [
           path: '',
           component: UserPanelOutletComponent,
           canActivate: [IsAuthorizedGuard],
-          children: []
+          children: [
+            {path: '', component: CategoriesListComponent},
+            {path: 'category/:id', component: NewsListComponent}
+          ]
         },
         {
           path: 'admin',
