@@ -9,12 +9,14 @@ import {NewsMockService} from './services/news-mock.service';
 import {NewsService} from './services/news.service';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
+import {MatProgressSpinnerModule} from '@angular/material';
 
 @NgModule({
   imports: [
     UIModule,
     CommonModule,
-    RouterModule
+    RouterModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     CategoriesMockService,

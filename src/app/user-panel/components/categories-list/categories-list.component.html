@@ -1,36 +1,70 @@
 <div class="container" *ngIf="!isLoading">
   <div class="categories-group" *ngFor="let group of categoriesGroups">
-    <div class="" [ngClass]="{'inverted': group.index % 2 === 0}">
-      <div class="group-row">
-        <div class="first-container">
-          <div class="category-container" *ngIf="group.categories[0]">
-            <div class="category" [style.backgroundImage]="prepareUrl(group.categories[0].image)">
-
+    <div class="group-row" [ngClass]="{'inverted': group.index % 2 === 0}">
+      <div class="first-container">
+        <div class="category-container" *ngIf="group.categories[0]">
+          <div class="category" [style.backgroundImage]="prepareUrl(group.categories[0].image)">
+            <div class="category-content">
+              <h1 class="category-header">
+                {{group.categories[0].title}}
+              </h1>
             </div>
           </div>
         </div>
-        <div class="second-container">
-          <div class="top-row">
-
-          </div>
-          <div class="middle-row">
-            <div class="left-panel">
-
+      </div>
+      <div class="second-container">
+        <div class="second-container-row top-row">
+          <div class="category-container" *ngIf="group.categories[1]">
+            <div class="category" [style.backgroundImage]="prepareUrl(group.categories[1].image)">
+              <div class="category-content">
+                <h1 class="category-header">
+                  {{group.categories[1].title}}
+                </h1>
+              </div>
             </div>
-            <div class="right-panel">
-
+          </div>
+        </div>
+        <div class="second-container-row middle-row">
+          <div class="middle-row-panel left-panel">
+            <div class="category-container" *ngIf="group.categories[2]">
+              <div class="category" [style.backgroundImage]="prepareUrl(group.categories[2].image)">
+                <div class="category-content">
+                  <h1 class="category-header">
+                    {{group.categories[2].title}}
+                  </h1>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="bottom-row">
-
+          <div class="middle-row-panel right-panel">
+            <div class="category-container" *ngIf="group.categories[3]">
+              <div class="category" [style.backgroundImage]="prepareUrl(group.categories[3].image)">
+                <div class="category-content">
+                  <h1 class="category-header">
+                    {{group.categories[3].title}}
+                  </h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="second-container-row bottom-row">
+          <div class="category-container" *ngIf="group.categories[4]">
+            <div class="category" [style.backgroundImage]="prepareUrl(group.categories[4].image)">
+              <div class="category-content">
+                <h1 class="category-header">
+                  {{group.categories[4].title}}
+                </h1>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="loader" *ngIf="isLoading">
-
+<div class="loader-container" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
 </div>
 <div class="error-container">
 

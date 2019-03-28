@@ -1,0 +1,98 @@
+@import "../../../ui/styles/colors";
+
+:host {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  .loader-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .container {
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+
+    .categories-group {
+      width: 100vw;
+      height: 100vh;
+
+      .group-row {
+        display: flex;
+        height: 100%;
+        width: 100%;
+
+        &.inverted {
+          flex-direction: row-reverse;
+        }
+
+        .first-container {
+          flex-grow: 1;
+        }
+
+        .second-container {
+          flex-grow: 2;
+          display: flex;
+          flex-direction: column;
+
+          .second-container-row {
+            flex-grow: 1;
+          }
+
+          .middle-row {
+            display: flex;
+
+            .middle-row-panel {
+              flex-grow: 1;
+            }
+          }
+        }
+
+        .category-container {
+          padding: 10px;
+          height: 100%;
+          width: 100%;
+          overflow: hidden;
+
+          .category {
+            transition: all ease-in 0.2s;
+            background-position: center;
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+
+            &:hover {
+              transform: scale(1.05);
+            }
+
+            .category-content {
+              width: 100%;
+              height: 100%;
+
+              .category-header {
+                font-size: 40px;
+                font-weight: lighter;
+                padding: 20px 30px;
+                width: 100%;
+                text-align: left;
+                background-image: linear-gradient(to right top, #c2185baa, #a22b66aa, #813668aa, #613a60aa, #473950aa, #3a3343aa, #302d3aa5, #272727aa, #1f1f1faa, #171717aa, #0e0e0eaa, #000000aa);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

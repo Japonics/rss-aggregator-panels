@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {ICategory} from '../interfaces/category.interface';
 import {ICategoriesService} from '../interfaces/categories-service.interface';
+import {delay} from 'rxjs/operators';
 
 @Injectable()
 export class CategoriesMockService implements ICategoriesService {
@@ -68,6 +69,6 @@ export class CategoriesMockService implements ICategoriesService {
       title: 'Social media'
     });
 
-    return of(categories);
+    return of(categories).pipe(delay(2000));
   }
 }
