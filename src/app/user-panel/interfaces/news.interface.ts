@@ -4,4 +4,7 @@ export interface INews {
   description: string;
   image: string;
   date: string;
+  source: string;
+  read: boolean;
+  is_favorite: boolean;
 }

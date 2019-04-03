@@ -9,6 +9,7 @@
   .top-bar-container {
     display: flex;
     align-items: center;
+    width: 100%;
     .nav-toggle {
       cursor: pointer;
       display: flex;
@@ -27,6 +28,13 @@
         color: #fff;
         font-size: 24px;
       }
+    }
+    .top-bar-title {
+      color: $primary-font-color;
+      text-align: center;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 50px;
     }
   }
 }

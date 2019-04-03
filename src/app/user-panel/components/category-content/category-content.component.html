@@ -1,0 +1,12 @@
+<div class="category-container" [routerLink]="['/category/', category.id]">
+  <div class="category" [style.backgroundImage]="prepareUrl(category.image)">
+    <div class="category-content">
+      <h1 class="category-header">
+        {{category.title}}
+      </h1>
+      <h3>
+        Not read articles: {{category.to_read}}
+      </h3>
+    </div>
+  </div>
+</div>

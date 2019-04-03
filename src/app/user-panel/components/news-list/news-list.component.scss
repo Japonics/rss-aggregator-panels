@@ -1,0 +1,10 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  .list-container {
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

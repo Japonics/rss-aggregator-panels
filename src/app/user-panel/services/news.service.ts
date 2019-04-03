@@ -23,7 +23,10 @@ export class NewsService implements INewsService {
               title: item.title,
               description: item.description,
               date: item.date,
-              image: item.image
+              image: item.image,
+              is_favorite: false,
+              read: false,
+              source: item.source
             };
           });
         }),

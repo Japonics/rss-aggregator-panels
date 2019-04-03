@@ -1,0 +1,45 @@
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+  .category-container {
+    display: block;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+
+    .category {
+      transition: all ease-in 0.2s;
+      background-position: center;
+      background-size: cover;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      .category-content {
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(to right top, #c2185baa, #a22b66aa, #813668aa, #613a60aa, #473950aa, #3a3343aa, #302d3aa5, #272727aa, #1f1f1faa, #171717aa, #0e0e0eaa, #000000aa);
+        transition: all ease-in 0.2s;
+        display: flex;
+        flex-direction: column;
+        padding: 20px 30px;
+
+        &:hover {
+          background-image: linear-gradient(to right top, #c2185b55, #a22b6655, #81366855, #613a6055, #47395055, #3a334355, #302d3555, #27272755, #1f1f1f55, #17171755, #0e0e0e55, #00000055);
+        }
+
+        .category-header {
+          font-size: 40px;
+          font-weight: lighter;
+          width: 100%;
+          text-align: left;
+        }
+      }
+    }
+  }
+}

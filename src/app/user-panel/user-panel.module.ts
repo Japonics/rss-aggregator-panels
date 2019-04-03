@@ -9,14 +9,18 @@ import {NewsMockService} from './services/news-mock.service';
 import {NewsService} from './services/news.service';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
-import {MatProgressSpinnerModule} from '@angular/material';
+import {MatButtonModule, MatIconModule, MatProgressSpinnerModule} from '@angular/material';
+import {CategoryContentComponent} from './components/category-content/category-content.component';
+import {NewsItemComponent} from './components/news-item/news-item.component';
 
 @NgModule({
   imports: [
     UIModule,
     CommonModule,
     RouterModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [
     CategoriesMockService,
@@ -27,7 +31,9 @@ import {MatProgressSpinnerModule} from '@angular/material';
   declarations: [
     UserPanelOutletComponent,
     CategoriesListComponent,
-    NewsListComponent
+    NewsListComponent,
+    CategoryContentComponent,
+    NewsItemComponent
   ],
   exports: [],
 })

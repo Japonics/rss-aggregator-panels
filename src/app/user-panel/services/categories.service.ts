@@ -19,9 +19,10 @@ export class CategoriesService implements ICategoriesService {
         map((response: ICategoryDto[]) => {
           return response.map(item => {
             return {
-             id: item.id,
-             image: item.image,
-             title: item.title
+              id: item.id,
+              image: item.image,
+              title: item.title,
+              to_read: item.to_read
             };
           });
         }),
