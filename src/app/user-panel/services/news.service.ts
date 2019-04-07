@@ -20,6 +20,7 @@ export class NewsService implements INewsService {
           return response.map(item => {
             return {
               id: item.id,
+              category_id: item.category_id,
               title: item.title,
               description: item.description,
               date: item.date,
@@ -48,6 +49,38 @@ export class NewsService implements INewsService {
       .put('', {})
       .pipe(
         map(item => item),
+        catchError(err => err)
+      );
+  }
+
+  public removeAsFavorite(newsID: string): Observable<any> {
+    return this._httpClientService
+      .put('', {})
+      .pipe(
+        map(item => item),
+        catchError(err => err)
+      );
+  }
+
+  public getFavoritesNews(categoryID: string): Observable<INews[]> {
+    return this._httpClientService
+      .get('')
+      .pipe<INews[], any>(
+        map((response: INewsDto[]) => {
+          return response.map(item => {
+            return {
+              id: item.id,
+              category_id: item.category_id,
+              title: item.title,
+              description: item.description,
+              date: item.date,
+              image: item.image,
+              is_favorite: false,
+              read: false,
+              source: item.source
+            };
+          });
+        }),
         catchError(err => err)
       );
   }

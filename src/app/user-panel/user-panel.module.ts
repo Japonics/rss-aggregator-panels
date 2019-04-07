@@ -12,6 +12,8 @@ import {RouterModule} from '@angular/router';
 import {MatButtonModule, MatIconModule, MatProgressSpinnerModule} from '@angular/material';
 import {CategoryContentComponent} from './components/category-content/category-content.component';
 import {NewsItemComponent} from './components/news-item/news-item.component';
+import {FavoritesPanelOutletComponent} from './components/favorites-panel-outlet/favorites-panel-outlet.component';
+import {FavoritesListComponent} from './components/favorites-list/favorites-list.component';
 
 @NgModule({
   imports: [
@@ -33,7 +35,9 @@ import {NewsItemComponent} from './components/news-item/news-item.component';
     CategoriesListComponent,
     NewsListComponent,
     CategoryContentComponent,
-    NewsItemComponent
+    NewsItemComponent,
+    FavoritesPanelOutletComponent,
+    FavoritesListComponent
   ],
   exports: [],
 })

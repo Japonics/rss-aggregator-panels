@@ -40,10 +40,14 @@ export class LoginFormComponent {
       .subscribe(
         (user: IUser) => {
           this._authManagerService.loginUser(user);
-          this._router.navigate(['/']).then();
+          this._router.navigate(['/']).then(
+            () => {
+              this._showMessage(`Welcome, ${user.username}`, 'Bye');
+            }
+          );
         },
         (message: string) => {
-          this._showMessage(message, "Close");
+          this._showMessage(message, 'Close');
         }
       );
   }

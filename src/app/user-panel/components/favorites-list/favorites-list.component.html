@@ -1,0 +1,5 @@
+<div class="list-container">
+  <app-news-item *ngFor="let item of news" [news]="item"
+                 (onRead)="onNewsRead($event)">
+  </app-news-item>
+</div>

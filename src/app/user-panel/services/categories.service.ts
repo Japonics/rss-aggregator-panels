@@ -5,6 +5,7 @@ import {catchError, map} from 'rxjs/operators';
 import {ICategory} from '../interfaces/category.interface';
 import {ICategoryDto} from '../interfaces/category-dto.interface';
 import {ICategoriesService} from '../interfaces/categories-service.interface';
+import {CATEGORIES_ROUTES} from './categories.routes';
 
 @Injectable()
 export class CategoriesService implements ICategoriesService {
@@ -14,7 +15,7 @@ export class CategoriesService implements ICategoriesService {
 
   public getCategories(): Observable<ICategory[]> {
     return this._httpClientService
-      .get('')
+      .get(CATEGORIES_ROUTES.getCategoriesRoute())
       .pipe<ICategory[], any>(
         map((response: ICategoryDto[]) => {
           return response.map(item => {

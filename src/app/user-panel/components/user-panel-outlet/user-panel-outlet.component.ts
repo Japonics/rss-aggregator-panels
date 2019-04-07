@@ -5,7 +5,6 @@ import {Component} from '@angular/core';
   templateUrl: './user-panel-outlet.component.html',
   styleUrls: ['./user-panel-outlet.component.scss']
 })
-
 export class UserPanelOutletComponent {
 
   constructor() {

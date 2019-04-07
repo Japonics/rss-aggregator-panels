@@ -9,6 +9,8 @@ import {LoginFormComponent} from './auth/components/login-form/login-form.compon
 import {ContentOutletComponent} from './core/components/content-outlet/content-outlet.component';
 import {CategoriesListComponent} from './user-panel/components/categories-list/categories-list.component';
 import {NewsListComponent} from './user-panel/components/news-list/news-list.component';
+import {FavoritesPanelOutletComponent} from './user-panel/components/favorites-panel-outlet/favorites-panel-outlet.component';
+import {FavoritesListComponent} from './user-panel/components/favorites-list/favorites-list.component';
 
 const routes: Routes = [
     {
@@ -30,6 +32,13 @@ const routes: Routes = [
           children: [
             {path: '', component: CategoriesListComponent},
             {path: 'category/:id', component: NewsListComponent}
+          ]
+        },
+        {
+          path: 'favorites',
+          component: FavoritesPanelOutletComponent,
+          children: [
+            {path: '', component: FavoritesListComponent}
           ]
         },
         {
