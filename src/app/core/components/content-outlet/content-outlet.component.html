@@ -11,7 +11,7 @@
         Navigation
       </h3>
       <ul class="nav">
-        <li class="nav-item" [routerLink]="['/']" routerLinkActive="active">
+        <li class="nav-item" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
           <span class="nav-item-icon">
             <mat-icon aria-hidden="false" aria-label="Example home icon" class="icon" color="accent">
               view_compact
@@ -29,7 +29,7 @@
           <p class="nav-item-label">Favorites</p>
         </li>
 
-        <li *ngIf="isAdmin" class="nav-item" [routerLink]="['/']" routerLinkActive="active">
+        <li *ngIf="isAdmin" class="nav-item" [routerLink]="['/admin']" routerLinkActive="active">
           <span class="nav-item-icon">
             <mat-icon aria-hidden="false" aria-label="Example home icon" class="icon" color="accent">
               settings

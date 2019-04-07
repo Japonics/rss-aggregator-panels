@@ -11,6 +11,7 @@ import {CategoriesListComponent} from './user-panel/components/categories-list/c
 import {NewsListComponent} from './user-panel/components/news-list/news-list.component';
 import {FavoritesPanelOutletComponent} from './user-panel/components/favorites-panel-outlet/favorites-panel-outlet.component';
 import {FavoritesListComponent} from './user-panel/components/favorites-list/favorites-list.component';
+import {AdminDashboardComponent} from './admin-panel/components/admin-dashboard/admin-dashboard.component';
 
 const routes: Routes = [
     {

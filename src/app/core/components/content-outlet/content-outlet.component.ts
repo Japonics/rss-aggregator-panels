@@ -2,7 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {MatDrawer} from '@angular/material';
 import {AuthManagerService} from '../../services/auth-manager.service';
 import {IUser} from '../../../auth/interfaces/user.interface';
-import {Router} from '@angular/router';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'app-content-outlet',
@@ -20,6 +20,12 @@ export class ContentOutletComponent {
               private _router: Router) {
     this.user = this._authManagerService.getUser();
     this.isAdmin = this.user.isAdmin;
+
+    this._router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.toggle(false);
+      }
+    });
   }
 
   public toggle(state: boolean): void {

@@ -5,7 +5,8 @@ import {Observable} from 'rxjs';
 @Injectable()
 export class HttpClientService {
 
-  constructor(private _httpClient: HttpClient) {}
+  constructor(private _httpClient: HttpClient) {
+  }
 
   public get(url: string): Observable<any> {
     return this._httpClient
@@ -17,8 +18,13 @@ export class HttpClientService {
       .post(url, data);
   }
 
-  public put (url: string, data: any): Observable<any> {
+  public put(url: string, data: any): Observable<any> {
     return this._httpClient
       .put(url, data);
+  }
+
+  public delete(url: string): Observable<any> {
+    return this._httpClient
+      .delete(url);
   }
 }

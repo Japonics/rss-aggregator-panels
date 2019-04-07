@@ -21,7 +21,7 @@ export const CATEGORIES_MOCKUP: ICategory[] = [
   },
   {
     id: '1',
-    image: 'http://www.progressivesports.co.uk/wp-content/uploads/2017/12/People-Sport.jpg',
+    image: 'https://biomedcomplex.pl/wp-content/uploads/2019/02/sport.jpg',
     title: 'Sport',
     to_read: 10
   },
@@ -39,7 +39,7 @@ export const CATEGORIES_MOCKUP: ICategory[] = [
   },
   {
     id: '1',
-    image: 'http://www.progressivesports.co.uk/wp-content/uploads/2017/12/People-Sport.jpg',
+    image: 'https://biomedcomplex.pl/wp-content/uploads/2019/02/sport.jpg',
     title: 'Sport',
     to_read: 10
   },
