@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Category edit</h1>
+<div mat-dialog-content>
+  <form [formGroup]="manageForm" (ngSubmit)="save()">
+    <mat-form-field>
+      <input matInput formControlName="title" placeholder="Title"/>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput formControlName="image" placeholder="Image URL:"/>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="color" formControlName="color" placeholder="Category color:"/>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button (click)="save()" [disabled]="!manageForm.valid" cdkFocusInitial>Save</button>
+</div>
