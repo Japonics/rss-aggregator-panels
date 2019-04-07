@@ -1,0 +1,57 @@
+<mat-card>
+  <mat-card-title>RSS channels</mat-card-title>
+  <mat-card-content class="content-container">
+
+    <div class="rss-container categories-container">
+      <div class="settings-title">
+        RSS categories
+      </div>
+      <div class="settings-content">
+        <mat-selection-list #categoriesList>
+          <mat-list-option *ngFor="let category of categories" [value]="category">
+            {{category.title}}
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+      <div class="settings-actions">
+        <button mat-stroked-button color="accent"
+                (click)="addCategory()">
+          Add
+        </button>
+        <button mat-stroked-button
+                color="accent"
+                [disabled]="isCategoryActionDisabled"
+                (click)="editCategory()">
+          Edit
+        </button>
+        <button mat-stroked-button
+                color="warn"
+                [disabled]="isCategoryActionDisabled"
+                (click)="removeCategory()">
+          Remove
+        </button>
+      </div>
+    </div>
+
+    <div class="rss-container channels-container">
+      <div class="settings-title">
+        Assigned channels
+      </div>
+      <div class="settings-content">
+        <mat-selection-list #channelsList>
+          <ng-container *ngIf="currentCategory">
+            <mat-list-option *ngFor="let channel of currentCategory.channels">
+              {{channel.source}}
+            </mat-list-option>
+          </ng-container>
+        </mat-selection-list>
+      </div>
+      <div class="settings-actions">
+        <button mat-stroked-button color="accent" [disabled]="isCategoryActionDisabled" (click)="addChannel()">Add</button>
+        <button mat-stroked-button color="accent" [disabled]="isChannelActionDisabled" (click)="editChannel()">Edit
+        </button>
+        <button mat-stroked-button color="warn" [disabled]="isChannelActionDisabled">Remove</button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
