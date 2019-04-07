@@ -45,7 +45,9 @@ const routes: Routes = [
           path: 'admin',
           component: AdminPanelOutletComponent,
           canActivate: [IsAuthorizedGuard, IsAdminGuard],
-          children: []
+          children: [
+            {path: '', component: AdminDashboardComponent}
+          ]
         }
       ]
     }
