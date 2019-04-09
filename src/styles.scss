@@ -45,3 +45,22 @@ html {
 ::-webkit-scrollbar-thumb:window-inactive {
   background: transparentize($primary-theme-color, 0.5);
 }
+
+.mat-snack-bar-container {
+  &.success {
+    background-color: $success-color;
+    color: #fff;
+  }
+  &.error {
+    background-color: $error-color;
+    color: #fff;
+  }
+  &.warn {
+    background-color: $warn-color;
+    color: #fff;
+  }
+  &.info {
+    background-color: $info-color;
+    color: #fff;
+  }
+}

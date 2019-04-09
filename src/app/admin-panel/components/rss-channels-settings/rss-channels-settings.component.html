@@ -1,57 +1,92 @@
 <mat-card>
   <mat-card-title>RSS channels</mat-card-title>
   <mat-card-content class="content-container">
-
-    <div class="rss-container categories-container">
-      <div class="settings-title">
-        RSS categories
-      </div>
-      <div class="settings-content">
-        <mat-selection-list #categoriesList>
-          <mat-list-option *ngFor="let category of categories" [value]="category">
-            {{category.title}}
-          </mat-list-option>
-        </mat-selection-list>
-      </div>
-      <div class="settings-actions">
-        <button mat-stroked-button color="accent"
-                (click)="addCategory()">
-          Add
-        </button>
-        <button mat-stroked-button
-                color="accent"
-                [disabled]="isCategoryActionDisabled"
-                (click)="editCategory()">
-          Edit
-        </button>
-        <button mat-stroked-button
-                color="warn"
-                [disabled]="isCategoryActionDisabled"
-                (click)="removeCategory()">
-          Remove
-        </button>
-      </div>
-    </div>
-
-    <div class="rss-container channels-container">
-      <div class="settings-title">
-        Assigned channels
-      </div>
-      <div class="settings-content">
-        <mat-selection-list #channelsList>
-          <ng-container *ngIf="currentCategory">
-            <mat-list-option *ngFor="let channel of currentCategory.channels">
-              {{channel.source}}
-            </mat-list-option>
+    <ng-container *ngIf="!errorOccurred">
+      <div class="rss-container categories-container">
+        <div class="settings-title">
+          RSS categories
+        </div>
+        <div class="settings-content">
+          <mat-selection-list #categoriesList>
+            <ng-container *ngIf="!isLoading && categories && categories.length">
+              <mat-list-option *ngFor="let category of categories" [value]="category">
+                {{category.title}}
+              </mat-list-option>
+            </ng-container>
+          </mat-selection-list>
+          <ng-container *ngIf="!isLoading && categories && !categories.length">
+            <div class="notification-container">
+              <p>There are not categories</p>
+            </div>
           </ng-container>
-        </mat-selection-list>
+          <div class="loader-container" *ngIf="isLoading">
+            <mat-spinner class="loader"></mat-spinner>
+          </div>
+        </div>
+        <div class="settings-actions">
+          <button mat-stroked-button color="accent"
+                  (click)="addCategory()">
+            Add
+          </button>
+          <button mat-stroked-button
+                  color="accent"
+                  [disabled]="isCategoryActionDisabled"
+                  (click)="editCategory()">
+            Edit
+          </button>
+          <button mat-stroked-button
+                  color="warn"
+                  [disabled]="isCategoryActionDisabled"
+                  (click)="removeCategory()">
+            Remove
+          </button>
+        </div>
       </div>
-      <div class="settings-actions">
-        <button mat-stroked-button color="accent" [disabled]="isCategoryActionDisabled" (click)="addChannel()">Add</button>
-        <button mat-stroked-button color="accent" [disabled]="isChannelActionDisabled" (click)="editChannel()">Edit
-        </button>
-        <button mat-stroked-button color="warn" [disabled]="isChannelActionDisabled">Remove</button>
+
+      <div class="rss-container channels-container">
+        <div class="settings-title">
+          Assigned channels
+        </div>
+        <div class="settings-content">
+          <mat-selection-list #channelsList>
+
+            <ng-container *ngIf="currentCategory && currentCategory.channels.length">
+              <mat-list-option *ngFor="let channel of currentCategory.channels" [value]="channel">
+                {{channel.source}}
+              </mat-list-option>
+            </ng-container>
+
+            <ng-container *ngIf="!currentCategory">
+              <div class="notification-container">
+                <p>Category is not selected</p>
+              </div>
+            </ng-container>
+
+            <ng-container *ngIf="currentCategory && !currentCategory.channels.length">
+              <div class="notification-container">
+                <p>There are not channels</p>
+              </div>
+            </ng-container>
+
+          </mat-selection-list>
+        </div>
+        <div class="settings-actions">
+          <button mat-stroked-button color="accent" [disabled]="isCategoryActionDisabled" (click)="addChannel()">
+            Add
+          </button>
+          <button mat-stroked-button color="accent" [disabled]="isChannelActionDisabled" (click)="editChannel()">
+            Edit
+          </button>
+          <button mat-stroked-button color="warn" [disabled]="isChannelActionDisabled" (click)="removeChannel()">
+            Remove
+          </button>
+        </div>
       </div>
-    </div>
+    </ng-container>
+    <ng-container *ngIf="errorOccurred">
+      <div class="notification-container-error">
+        <p><b>Ups!</b> An error has occurred :/</p>
+      </div>
+    </ng-container>
   </mat-card-content>
 </mat-card>

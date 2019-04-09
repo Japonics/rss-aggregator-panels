@@ -22,7 +22,7 @@ export class NewsMockService implements INewsService {
     return of(true);
   }
 
-  public getFavoritesNews(categoryID: string): Observable<INews[]> {
+  public getFavoritesNews(): Observable<INews[]> {
     const filtered: INews[] = NEWS_MOCKUP.filter(x => x.is_favorite);
     return of(filtered);
   }

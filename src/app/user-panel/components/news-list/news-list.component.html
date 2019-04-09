@@ -1,5 +1,17 @@
-<div class="list-container">
-  <app-news-item *ngFor="let item of news" [news]="item"
-                 (onRead)="onNewsRead($event)">
-  </app-news-item>
-</div>
+<ng-container *ngIf="!errorOccurred && !isLoading && news && news.length">
+  <div class="list-container" @list>
+    <app-news-item *ngFor="let item of news" [news]="item"
+                   @items
+                   (onRead)="onNewsRead($event)">
+    </app-news-item>
+  </div>
+</ng-container>
+<ng-container *ngIf="!isLoading">
+  <div class="notification-container" *ngIf="!errorOccurred && news && !news.length">
+    <p>There are no news ¯\_(ツ)_/¯</p>
+  </div>
+  <div class="notification-container" *ngIf="errorOccurred">
+    <p><b>Ups!</b> An error has occurred :/</p>
+  </div>
+</ng-container>
+

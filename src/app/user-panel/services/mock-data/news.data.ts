@@ -298,6 +298,6 @@ export const NEWS_MOCKUP: INews[] = [{
   'date': '10/3/2018',
   'image': 'http://dummyimage.com/1160x1187.png/cc0000/ffffff',
   source: 'https://futurism.com/people-reading-publishers-gamifying-books',
-  is_favorite: true,
+  is_favorite: false,
   read: false
 }];

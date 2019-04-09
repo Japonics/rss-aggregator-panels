@@ -1,9 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClientService} from '../../core/services/http-client.service';
-import {Observable, of, throwError} from 'rxjs';
-import {catchError, map} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
 import {IUser} from '../interfaces/user.interface';
-import {IUserDto} from '../interfaces/user-dto.interface';
 import {ICredentials} from '../interfaces/credentials.interface';
 import {IAuthService} from '../interfaces/auth-service.interface';
 
@@ -11,6 +8,10 @@ import {IAuthService} from '../interfaces/auth-service.interface';
 export class AuthMockService implements IAuthService {
 
   constructor() {
+  }
+
+  public loadToken(token: string): void {
+    console.log(token);
   }
 
   public login(credentials: ICredentials): Observable<IUser> {

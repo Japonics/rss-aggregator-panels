@@ -1,13 +1,15 @@
+@import "../../../ui/styles/mixins";
+
 :host {
   display: block;
   width: 100%;
   height: 100%;
+
   .list-container {
-    width: 100%;
-    height: 100%;
-    max-height: 100%;
-    overflow-y: auto;
-    display: flex;
-    flex-wrap: wrap;
+    @include news-list-container();
+  }
+
+  .notification-container {
+    @include notification-container();
   }
 }

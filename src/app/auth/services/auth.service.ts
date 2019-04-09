@@ -13,6 +13,10 @@ export class AuthService implements IAuthService {
   constructor(private _httpClientService: HttpClientService) {
   }
 
+  public loadToken(token: string): void {
+    this._httpClientService.loadToken(token);
+  }
+
   public login(credentials: ICredentials): Observable<IUser> {
     return this._httpClientService
       .post('', credentials)

@@ -13,6 +13,9 @@ import {AuthManagerService} from './core/services/auth-manager.service';
 import {ContentOutletComponent} from './core/components/content-outlet/content-outlet.component';
 import {TopBarComponent} from './core/components/top-bar/top-bar.component';
 import {MatIconModule, MatSidenavModule} from '@angular/material';
+import {HttpClientService} from './core/services/http-client.service';
+import {NotificationService} from './core/services/notification.service';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -24,7 +27,8 @@ import {MatIconModule, MatSidenavModule} from '@angular/material';
     AdminPanelModule,
     UserPanelModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
@@ -34,7 +38,9 @@ import {MatIconModule, MatSidenavModule} from '@angular/material';
   providers: [
     IsAdminGuard,
     IsAuthorizedGuard,
-    AuthManagerService
+    AuthManagerService,
+    HttpClientService,
+    NotificationService
   ],
   bootstrap: [
     AppComponent

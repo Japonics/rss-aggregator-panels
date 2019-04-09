@@ -8,7 +8,10 @@ export const NEWS_ROUTES = {
   markAsFavoriteRoute: (newsID: string) => {
     return `/api/news/${newsID}`;
   },
-  getFavoritesNews: (categoryID: string) => {
-    return `/api/news/${categoryID}/favorites`;
+  removeAsFavoriteRoute: (newsID: string) => {
+    return `/api/news/${newsID}`;
+  },
+  getFavoritesNews: () => {
+    return `/api/news/favorites`;
   }
 };

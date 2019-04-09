@@ -17,12 +17,7 @@ export class TopBarComponent {
     this.user = this._authManagerService.getUser();
   }
 
-  /**
-   * Handle toggle event
-   *
-   * @param event
-   */
-  public toggleSidenav(event): void {
+  public toggleSidenav(): void {
     this.onToggle.next(true);
   }
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {ICategory} from '../../interfaces/category.interface';
 import {CategoriesMockService} from '../../services/categories-mock.service';
 import {MatDialog, MatSelectionList, MatSelectionListChange} from '@angular/material';
@@ -11,13 +11,15 @@ import {
   IManageRssChannelModalComponentInput,
   ManageRssChannelModalComponent
 } from '../manage-rss-channel-modal/manage-rss-channel-modal.component';
+import {NotificationService} from '../../../core/services/notification.service';
+import {ChannelsMockService} from '../../services/channels-mock.service';
 
 @Component({
   selector: 'app-rss-channels-settings',
   templateUrl: './rss-channels-settings.component.html',
   styleUrls: ['./rss-channels-settings.component.scss']
 })
-export class RssChannelsSettingsComponent implements OnInit, AfterViewInit {
+export class RssChannelsSettingsComponent {
 
   @ViewChild('categoriesList', {read: MatSelectionList}) categoriesList: MatSelectionList;
   @ViewChild('channelsList', {read: MatSelectionList}) channelsList: MatSelectionList;
@@ -25,13 +27,13 @@ export class RssChannelsSettingsComponent implements OnInit, AfterViewInit {
   public categories: ICategory[] = [];
   public currentCategory: ICategory = null;
   public currentChannel: IRssChannel = null;
+  public isLoading: boolean = true;
+  public errorOccurred: boolean = false;
 
   constructor(private _categoriesService: CategoriesMockService,
+              private _notificationService: NotificationService,
+              private _channelsService: ChannelsMockService,
               private _dialog: MatDialog) {
-
-  }
-
-  public ngOnInit(): void {
     this._categoriesService
       .getCategories()
       .subscribe(
@@ -39,12 +41,16 @@ export class RssChannelsSettingsComponent implements OnInit, AfterViewInit {
           this.categories = categories;
           this._createSubscriptionForSelection();
         },
-        () => {
+        (error: string) => {
+          this.isLoading = false;
+          this.errorOccurred = true;
+          this._notificationService.showNotification({
+            message: error,
+            type: 'error',
+            closeLabel: 'Ok :('
+          });
         }
       );
-  }
-
-  public ngAfterViewInit(): void {
 
   }
 
@@ -67,6 +73,9 @@ export class RssChannelsSettingsComponent implements OnInit, AfterViewInit {
   }
 
   public editCategory(): void {
+    if (!this.currentCategory) {
+      return;
+    }
 
     const data: IManageCategoryModalComponentInput = {
       category: Object.assign({}, this.currentCategory)
@@ -86,7 +95,7 @@ export class RssChannelsSettingsComponent implements OnInit, AfterViewInit {
   }
 
   public removeCategory(): void {
-    if (this.currentCategory === null) {
+    if (!this.currentCategory) {
       return;
     }
 
@@ -98,8 +107,12 @@ export class RssChannelsSettingsComponent implements OnInit, AfterViewInit {
           this.categories.splice(index, 1);
           this.currentCategory = null;
         },
-        () => {
-
+        (error: string) => {
+          this._notificationService.showNotification({
+            message: error,
+            type: 'error',
+            closeLabel: 'Ok :('
+          });
         }
       );
   }
@@ -122,6 +135,10 @@ export class RssChannelsSettingsComponent implements OnInit, AfterViewInit {
   }
 
   public editChannel(): void {
+    if (!this.currentChannel) {
+      return;
+    }
+
     const data: IManageRssChannelModalComponentInput = {
       channel: Object.assign({}, this.currentChannel)
     };
@@ -138,6 +155,31 @@ export class RssChannelsSettingsComponent implements OnInit, AfterViewInit {
     });
   }
 
+  public removeChannel(): void {
+    if (!this.currentChannel) {
+      return;
+    }
+
+    this._channelsService
+      .deleteChannel(this.currentChannel.id)
+      .subscribe(
+        () => {
+          const index: number = this.currentCategory.channels
+            .findIndex(x => x.id === this.currentChannel.id);
+
+          this.currentCategory.channels.splice(index, 1);
+          this.currentChannel = null;
+        },
+        (error: string) => {
+          this._notificationService.showNotification({
+            message: error,
+            type: 'error',
+            closeLabel: 'Ok :('
+          });
+        }
+      );
+  }
+
   private _createSubscriptionForSelection(): void {
     this.categoriesList.selectionChange.subscribe((option: MatSelectionListChange) => {
       this.categoriesList.deselectAll();
@@ -150,6 +192,8 @@ export class RssChannelsSettingsComponent implements OnInit, AfterViewInit {
       option.option.selected = true;
       this.currentChannel = option.option.value;
     });
+
+    this.isLoading = false;
   }
 
   get isCategoryActionDisabled(): boolean {

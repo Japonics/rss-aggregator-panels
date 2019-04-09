@@ -1,0 +1,32 @@
+@import "../../../ui/styles/colors";
+@import "../../../ui/styles/mixins";
+
+:host {
+  display: block;
+  position: relative;
+  width: 100%;
+
+  .content-container {
+    display: block;
+
+    .settings-container {
+      display: flex;
+      flex-wrap: wrap;
+
+      .settings-group {
+        flex-grow: 1;
+        width: 25%;
+        min-width: 400px;
+
+        .mat-form-field {
+          width: 100%;
+        }
+      }
+    }
+
+    .notification-container {
+      @include notification-container();
+      min-height: 100px;
+    }
+  }
+}

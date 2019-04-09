@@ -3,7 +3,15 @@ import {UIModule} from '../ui/ui.module';
 import {AdminPanelOutletComponent} from './components/admin-panel-outlet/admin-panel-outlet.component';
 import {AdminDashboardComponent} from './components/admin-dashboard/admin-dashboard.component';
 import {RssChannelsSettingsComponent} from './components/rss-channels-settings/rss-channels-settings.component';
-import {MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatListModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatDialogModule,
+  MatInputModule,
+  MatListModule,
+  MatProgressSpinnerModule,
+  MatSelectModule
+} from '@angular/material';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {ManageCategoryModalComponent} from './components/manage-category-modal/manage-category-modal.component';
@@ -11,6 +19,11 @@ import {ManageRssChannelModalComponent} from './components/manage-rss-channel-mo
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CategoriesMockService} from './services/categories-mock.service';
 import {CategoriesService} from './services/categories.service';
+import {OthersSettingsComponent} from './components/others-settings/others-settings.component';
+import {SettingsMockService} from './services/settings-mock.service';
+import {SettingsService} from './services/settings.service';
+import {ChannelsService} from './services/channels.service';
+import {ChannelsMockService} from './services/channels-mock.service';
 
 @NgModule({
   imports: [
@@ -24,18 +37,25 @@ import {CategoriesService} from './services/categories.service';
     MatInputModule,
     FormsModule,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressSpinnerModule,
+    MatSelectModule
   ],
   providers: [
     CategoriesMockService,
-    CategoriesService
+    CategoriesService,
+    SettingsMockService,
+    SettingsService,
+    ChannelsService,
+    ChannelsMockService
   ],
   declarations: [
     AdminPanelOutletComponent,
     AdminDashboardComponent,
     RssChannelsSettingsComponent,
     ManageCategoryModalComponent,
-    ManageRssChannelModalComponent
+    ManageRssChannelModalComponent,
+    OthersSettingsComponent
   ],
   exports: [],
   entryComponents: [

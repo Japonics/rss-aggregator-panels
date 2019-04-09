@@ -1,10 +1,5 @@
 <article>
   <section class="image-section" [style.backgroundImage]="prepareUrl(news.image)">
-    <span class="favorite-mark" *ngIf="news.is_favorite">
-      <mat-icon aria-hidden="false" aria-label="Example home icon" class="burger" color="accent">
-          favorite
-        </mat-icon>
-    </span>
   </section>
   <section class="content-section">
     <h2 class="title">{{news.title}}</h2>
@@ -17,17 +12,16 @@
         </mat-icon>
         Read
       </button>
-      <button mat-raised-button (click)="addToFavorites()">
-        <mat-icon aria-hidden="false" aria-label="Example home icon" class="btn-icon" [ngClass]="{'is-favorite': news.is_favorite}" color="accent">
-          favorite
-        </mat-icon>
-        Favorites
-      </button>
-      <button mat-raised-button (click)="markAsRead()">
+      <button mat-raised-button (click)="markAsRead()" *ngIf="!isFavorite">
         <mat-icon aria-hidden="false" aria-label="Example home icon" class="btn-icon" color="accent">
           done
         </mat-icon>
         Mark as read
+      </button>
+      <button mat-raised-button (click)="changeFavoriteState()">
+        <mat-icon aria-hidden="false" aria-label="Example home icon" class="btn-icon" [ngClass]="{'is-favorite': news.is_favorite}" color="accent">
+          favorite
+        </mat-icon>
       </button>
     </div>
   </section>

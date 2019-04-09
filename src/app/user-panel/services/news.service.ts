@@ -5,6 +5,7 @@ import {catchError, map} from 'rxjs/operators';
 import {INewsService} from '../interfaces/news-service.interface';
 import {INews} from '../interfaces/news.interface';
 import {INewsDto} from '../interfaces/news-dto.interface';
+import {NEWS_ROUTES} from './news.routes';
 
 @Injectable()
 export class NewsService implements INewsService {
@@ -14,7 +15,7 @@ export class NewsService implements INewsService {
 
   public getNews(categoryID: string): Observable<INews[]> {
     return this._httpClientService
-      .get('')
+      .get(NEWS_ROUTES.getNewsRoute(categoryID))
       .pipe<INews[], any>(
         map((response: INewsDto[]) => {
           return response.map(item => {
@@ -37,7 +38,7 @@ export class NewsService implements INewsService {
 
   public markAsRead(newsID: string): Observable<any> {
     return this._httpClientService
-      .put('', {})
+      .put(NEWS_ROUTES.markAsReadRoute(newsID), {})
       .pipe(
         map(item => item),
         catchError(err => err)
@@ -46,7 +47,7 @@ export class NewsService implements INewsService {
 
   public markAsFavorite(newsID: string): Observable<any> {
     return this._httpClientService
-      .put('', {})
+      .put(NEWS_ROUTES.markAsFavoriteRoute(newsID), {})
       .pipe(
         map(item => item),
         catchError(err => err)
@@ -55,16 +56,16 @@ export class NewsService implements INewsService {
 
   public removeAsFavorite(newsID: string): Observable<any> {
     return this._httpClientService
-      .put('', {})
+      .delete(NEWS_ROUTES.removeAsFavoriteRoute(newsID))
       .pipe(
         map(item => item),
         catchError(err => err)
       );
   }
 
-  public getFavoritesNews(categoryID: string): Observable<INews[]> {
+  public getFavoritesNews(): Observable<INews[]> {
     return this._httpClientService
-      .get('')
+      .get(NEWS_ROUTES.getFavoritesNews())
       .pipe<INews[], any>(
         map((response: INewsDto[]) => {
           return response.map(item => {

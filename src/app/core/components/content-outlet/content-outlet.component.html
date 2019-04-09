@@ -48,8 +48,8 @@
         </li>
       </ul>
     </mat-drawer>
-    <mat-drawer-content>
-      <router-outlet></router-outlet>
+    <mat-drawer-content [@routeAnimations]="outlet" >
+      <router-outlet #outlet></router-outlet>
     </mat-drawer-content>
   </mat-drawer-container>
 </div>

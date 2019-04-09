@@ -1,0 +1,19 @@
+<mat-card>
+  <mat-card-title>General settings</mat-card-title>
+  <mat-card-content class="content-container">
+      <div class="settings-container" *ngIf="!errorOccurred">
+        <form [formGroup]="settingsForm" (ngSubmit)="save()">
+          <div class="settings-group">
+            <mat-form-field>
+              <mat-label>News refresh interval [minutes]:</mat-label>
+              <input matInput formControlName="interval" type="number" min="60" max="86400"/>
+            </mat-form-field>
+          </div>
+          <button mat-stroked-button color="accent" type="submit" [disabled]="!settingsForm.valid">Save</button>
+        </form>
+      </div>
+      <div class="notification-container" *ngIf="errorOccurred">
+        <p><b>Ups!</b> An error has occurred :/</p>
+      </div>
+  </mat-card-content>
+</mat-card>

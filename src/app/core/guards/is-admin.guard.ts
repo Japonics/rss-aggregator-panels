@@ -7,7 +7,6 @@ export class IsAdminGuard implements CanActivate {
 
   constructor(private _authManagerService: AuthManagerService) {}
 
-
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     return new Promise(((resolve) => {
       this._authManagerService.isAdmin()

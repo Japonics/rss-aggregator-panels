@@ -1,27 +1,32 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ICategoriesGroup} from '../../interfaces/categories-group.interface';
 import {CategoriesMockService} from '../../services/categories-mock.service';
 import {ICategory} from '../../interfaces/category.interface';
+import {animate, style, transition, trigger} from '@angular/animations';
+import {NotificationService} from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-categories-list',
   templateUrl: './categories-list.component.html',
-  styleUrls: ['./categories-list.component.scss']
+  styleUrls: ['./categories-list.component.scss'],
+  animations: [
+    trigger('category', [
+      transition(':enter', [
+        style({transform: 'scale(0.5)', opacity: 0}),  // initial
+        animate('1s cubic-bezier(.8, -0.6, 0.2, 1.5)',
+          style({transform: 'scale(1)', opacity: 1}))  // final
+      ]),
+    ])
+  ]
 })
-export class CategoriesListComponent implements OnInit {
+export class CategoriesListComponent {
 
   public categoriesGroups: ICategoriesGroup[] = [];
   public isLoading: boolean = true;
+  public errorOccurred: boolean = false;
 
   constructor(private _categoriesService: CategoriesMockService,
-  ) {
-  }
-
-  public ngOnInit(): void {
-    this._getCategories();
-  }
-
-  private _getCategories(): void {
+              private _notificationService: NotificationService) {
     this._categoriesService
       .getCategories()
       .subscribe(
@@ -53,11 +58,17 @@ export class CategoriesListComponent implements OnInit {
             groups.push(group);
           }
 
-          console.log(groups);
           this.categoriesGroups = groups;
           this.isLoading = false;
         },
-        () => {
+        (error: string) => {
+          this.isLoading = false;
+          this.errorOccurred = true;
+          this._notificationService.showNotification({
+            message: error,
+            closeLabel: 'Ok ;(',
+            type: 'error'
+          });
         }
       );
   }

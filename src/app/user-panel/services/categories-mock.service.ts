@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Observable, of} from 'rxjs';
 import {ICategory} from '../interfaces/category.interface';
 import {ICategoriesService} from '../interfaces/categories-service.interface';
-import {delay} from 'rxjs/operators';
 import {CATEGORIES_MOCKUP} from './mock-data/categories.data';
 
 @Injectable()
@@ -12,6 +11,6 @@ export class CategoriesMockService implements ICategoriesService {
   }
 
   public getCategories(): Observable<ICategory[]> {
-    return of(CATEGORIES_MOCKUP).pipe(delay(2000));
+    return of(CATEGORIES_MOCKUP);
   }
 }

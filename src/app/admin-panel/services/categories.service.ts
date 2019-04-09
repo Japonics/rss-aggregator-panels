@@ -6,6 +6,7 @@ import {ICategoriesService} from '../interfaces/categories-service.interface';
 import {HttpClientService} from '../../core/services/http-client.service';
 import {ICategoryDto} from '../interfaces/category-dto.interface';
 import {IRssChannelDto} from '../interfaces/rss-channel-dto.interface';
+import {CATEGORIES_ROUTES} from './categories.routes';
 
 @Injectable()
 export class CategoriesService implements ICategoriesService {
@@ -15,7 +16,7 @@ export class CategoriesService implements ICategoriesService {
 
   public getCategories(): Observable<ICategory[]> {
     return this._httpService
-      .get('')
+      .get(CATEGORIES_ROUTES.getCategoriesRoute())
       .pipe<ICategory[], any>(
         map((response: ICategoryDto[]) => {
           return response.map(item => {
@@ -47,7 +48,7 @@ export class CategoriesService implements ICategoriesService {
     };
 
     return this._httpService
-      .post('', categoryDto)
+      .post(CATEGORIES_ROUTES.createCategoryRoute(), categoryDto)
       .pipe<ICategory, any>(
         map((item: ICategoryDto) => {
           return {
@@ -64,7 +65,7 @@ export class CategoriesService implements ICategoriesService {
 
   public updateCategory(category: ICategory): Observable<ICategory> {
     const categoryDto: ICategoryDto = {
-      id: null,
+      id: category.id,
       title: category.title,
       image: category.image,
       channels: [],
@@ -72,7 +73,7 @@ export class CategoriesService implements ICategoriesService {
     };
 
     return this._httpService
-      .put('', categoryDto)
+      .put(CATEGORIES_ROUTES.updateCategoryRoute(categoryDto.id), categoryDto)
       .pipe<ICategory, any>(
         map((item: ICategoryDto) => {
           return {
@@ -89,7 +90,7 @@ export class CategoriesService implements ICategoriesService {
 
   public deleteCategory(categoryID: string): Observable<any> {
     return this._httpService
-      .delete('')
+      .delete(CATEGORIES_ROUTES.deleteCategoryRoute(categoryID))
       .pipe(
         map(item => item),
         catchError(err => err)

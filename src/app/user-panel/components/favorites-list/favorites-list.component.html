@@ -1,5 +1,15 @@
-<div class="list-container">
+<div class="list-container" *ngIf="!isLoading && !errorOccurred && news && news.length" @list>
   <app-news-item *ngFor="let item of news" [news]="item"
-                 (onRead)="onNewsRead($event)">
+                 @items
+                 (onRemoveAsFavorite)="onRemovedFromFavorites($event)"
+                 [isFavorite]="true">
   </app-news-item>
 </div>
+<ng-container *ngIf="!isLoading">
+  <div class="notification-container" *ngIf="!errorOccurred && news && !news.length">
+    <p>There are no favorite news ¯\_(ツ)_/¯</p>
+  </div>
+  <div class="notification-container" *ngIf="errorOccurred">
+    <p><b>Ups!</b> An error has occurred :/</p>
+  </div>
+</ng-container>
