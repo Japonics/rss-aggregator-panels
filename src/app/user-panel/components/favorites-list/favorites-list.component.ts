@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {INews} from '../../interfaces/news.interface';
-import {NewsMockService} from '../../services/news-mock.service';
 import {NEWS_LIST_ANIMATION} from '../../../ui/animations/news-list.animation';
 import {NotificationService} from '../../../core/services/notification.service';
+import {NewsService} from '../../services/news.service';
 
 @Component({
   selector: 'app-favorites-list',
@@ -16,7 +16,7 @@ export class FavoritesListComponent {
   public isLoading: boolean = true;
   public errorOccurred: boolean = false;
 
-  constructor(private _newsService: NewsMockService,
+  constructor(private _newsService: NewsService,
               private _notificationService: NotificationService) {
     this._newsService
       .getFavoritesNews()

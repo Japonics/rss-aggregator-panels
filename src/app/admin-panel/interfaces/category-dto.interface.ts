@@ -1,7 +1,7 @@
 import {IRssChannelDto} from './rss-channel-dto.interface';
 
 export interface ICategoryDto {
-  id: string;
+  _id: string;
   title: string;
   image: string;
   channels: IRssChannelDto[];

@@ -3,10 +3,11 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {IRssChannel} from '../../interfaces/rss-channel.interface';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {NotificationService} from '../../../core/services/notification.service';
-import {ChannelsMockService} from '../../services/channels-mock.service';
+import {ChannelsService} from '../../services/channels.service';
 
 export interface IManageRssChannelModalComponentInput {
   channel: IRssChannel;
+  categoryID: string;
 }
 
 @Component({
@@ -20,7 +21,7 @@ export class ManageRssChannelModalComponent {
   public isNew: boolean = true;
 
   constructor(public dialogRef: MatDialogRef<ManageRssChannelModalComponent>,
-              private _channelsService: ChannelsMockService,
+              private _channelsService: ChannelsService,
               private _notificationService: NotificationService,
               @Inject(MAT_DIALOG_DATA) public data: IManageRssChannelModalComponentInput) {
 
@@ -42,6 +43,7 @@ export class ManageRssChannelModalComponent {
     }
 
     const data: IRssChannel = this.manageForm.value;
+    data.category_id = this.data.categoryID;
 
     if (!this.isNew) {
       data.id = this.data.channel.id;

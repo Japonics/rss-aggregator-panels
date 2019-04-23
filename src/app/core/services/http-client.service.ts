@@ -6,6 +6,7 @@ import {Observable} from 'rxjs';
 export class HttpClientService {
 
   private _token: string = null;
+  private _baseUrl: string = 'http://localhost:8000';
 
   constructor(private _httpClient: HttpClient) {
   }
@@ -20,22 +21,26 @@ export class HttpClientService {
 
   public get(url: string): Observable<any> {
     return this._httpClient
-      .get(url, this._prepareOptions());
+      .get(this._prepareUrl(url), this._prepareOptions());
   }
 
   public post(url: string, data: any): Observable<any> {
     return this._httpClient
-      .post(url, data, this._prepareOptions());
+      .post(this._prepareUrl(url), data, this._prepareOptions());
   }
 
   public put(url: string, data: any): Observable<any> {
     return this._httpClient
-      .put(url, data, this._prepareOptions());
+      .put(this._prepareUrl(url), data, this._prepareOptions());
   }
 
   public delete(url: string): Observable<any> {
     return this._httpClient
-      .delete(url, this._prepareOptions());
+      .delete(this._prepareUrl(url), this._prepareOptions());
+  }
+
+  private _prepareUrl(url: string): string {
+    return `${this._baseUrl}${url}`;
   }
 
   private _prepareOptions(): object {

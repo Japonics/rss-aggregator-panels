@@ -1,4 +1,5 @@
 export interface IRssChannel {
-  source: string;
   id: string;
+  category_id: string;
+  source: string;
 }

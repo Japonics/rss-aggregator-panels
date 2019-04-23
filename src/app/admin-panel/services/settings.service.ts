@@ -1,12 +1,11 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {ICategory} from '../interfaces/category.interface';
+import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {HttpClientService} from '../../core/services/http-client.service';
-import {ICategoryDto} from '../interfaces/category-dto.interface';
 import {ISettingsService} from '../interfaces/settings-service.interface';
 import {ISettings} from '../interfaces/settings.interface';
 import {ISettingsDto} from '../interfaces/settings-dto.interface';
+import {SETTINGS_ROUTES} from './settings.routes';
 
 @Injectable()
 export class SettingsService implements ISettingsService {
@@ -16,35 +15,34 @@ export class SettingsService implements ISettingsService {
 
   public getSettings(): Observable<ISettings> {
     return this._httpService
-      .get('')
+      .get(SETTINGS_ROUTES.getSettingsRoute())
       .pipe<ISettings, any>(
         map((response: ISettingsDto) => {
           return {
-            interval: response.interval
+            interval: response.interval,
+            id: response._id
           };
         }),
-        catchError(err => err)
+        catchError(err => throwError(err.error.message))
       );
   }
 
   public storeSettings(settings: ISettings): Observable<ISettings> {
     const settingsDto: ISettingsDto = {
+      _id: settings.id,
       interval: settings.interval
     };
 
     return this._httpService
-      .post('', settingsDto)
-      .pipe<ICategory, any>(
-        map((item: ICategoryDto) => {
+      .post(SETTINGS_ROUTES.storeSettingsRoute(), settingsDto)
+      .pipe<ISettings, any>(
+        map((item: ISettingsDto) => {
           return {
-            id: item.id,
-            image: item.image,
-            title: item.title,
-            channels: [],
-            color: item.color
+            id: item._id,
+            interval: item.interval
           };
         }),
-        catchError(err => err)
+        catchError(err => throwError(err.error.message))
       );
   }
 }

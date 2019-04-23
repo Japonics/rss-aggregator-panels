@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {HttpClientService} from '../../core/services/http-client.service';
 import {IRssChannelDto} from '../interfaces/rss-channel-dto.interface';
@@ -15,8 +15,9 @@ export class ChannelsService implements IChannelsService {
 
   public createChannel(channel: IRssChannel): Observable<IRssChannel> {
     const channelDto: IRssChannelDto = {
-      id: null,
-      source: channel.source
+      _id: null,
+      source: channel.source,
+      category_id: channel.category_id
     };
 
     return this._httpService
@@ -24,30 +25,33 @@ export class ChannelsService implements IChannelsService {
       .pipe<IRssChannel, any>(
         map((item: IRssChannelDto) => {
           return {
-            id: item.id,
-            source: item.source
+            id: item._id,
+            source: item.source,
+            category_id: item.category_id
           };
         }),
-        catchError(err => err)
+        catchError(err => throwError(err.error.message))
       );
   }
 
   public updateChannel(channel: IRssChannel): Observable<IRssChannel> {
     const channelDto: IRssChannelDto = {
-      id: channel.id,
-      source: channel.source
+      _id: channel.id,
+      source: channel.source,
+      category_id: channel.category_id
     };
 
     return this._httpService
-      .put(CHANNELS_ROUTES.updateChannelRoute(channelDto.id), channelDto)
+      .put(CHANNELS_ROUTES.updateChannelRoute(channelDto._id), channelDto)
       .pipe<IRssChannel, any>(
         map((item: IRssChannelDto) => {
           return {
-            id: item.id,
-            source: item.source
+            id: item._id,
+            source: item.source,
+            category_id: item.category_id
           };
         }),
-        catchError(err => err)
+        catchError(err => throwError(err.error.message))
       );
   }
 
@@ -56,7 +60,7 @@ export class ChannelsService implements IChannelsService {
       .delete(CHANNELS_ROUTES.deleteChannelRoute(channelID))
       .pipe(
         map(item => item),
-        catchError(err => err)
+        catchError(err => throwError(err.error.message))
       );
   }
 }

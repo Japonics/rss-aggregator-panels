@@ -1,9 +1,8 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ISettings} from '../../interfaces/settings.interface';
-import {SettingsMockService} from '../../services/settings-mock.service';
-import {ISettingsDto} from '../../interfaces/settings-dto.interface';
 import {NotificationService} from '../../../core/services/notification.service';
+import {SettingsService} from '../../services/settings.service';
 
 @Component({
   selector: 'app-others-settings',
@@ -15,7 +14,7 @@ export class OthersSettingsComponent {
   public settingsForm: FormGroup;
   public errorOccurred: boolean = false;
 
-  constructor(private _settingsService: SettingsMockService,
+  constructor(private _settingsService: SettingsService,
               private _notificationService: NotificationService) {
     this.settingsForm = new FormGroup({
       interval: new FormControl(60, [
@@ -66,7 +65,7 @@ export class OthersSettingsComponent {
       );
   }
 
-  private _processSettings(settings: ISettingsDto): void {
+  private _processSettings(settings: ISettings): void {
     this.settingsForm.setValue({interval: settings.interval});
   }
 }

@@ -1,6 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
 import {ICategory} from '../../interfaces/category.interface';
-import {CategoriesMockService} from '../../services/categories-mock.service';
 import {MatDialog, MatSelectionList, MatSelectionListChange} from '@angular/material';
 import {
   IManageCategoryModalComponentInput,
@@ -12,7 +11,8 @@ import {
   ManageRssChannelModalComponent
 } from '../manage-rss-channel-modal/manage-rss-channel-modal.component';
 import {NotificationService} from '../../../core/services/notification.service';
-import {ChannelsMockService} from '../../services/channels-mock.service';
+import {CategoriesService} from '../../services/categories.service';
+import {ChannelsService} from '../../services/channels.service';
 
 @Component({
   selector: 'app-rss-channels-settings',
@@ -30,9 +30,9 @@ export class RssChannelsSettingsComponent {
   public isLoading: boolean = true;
   public errorOccurred: boolean = false;
 
-  constructor(private _categoriesService: CategoriesMockService,
+  constructor(private _categoriesService: CategoriesService,
               private _notificationService: NotificationService,
-              private _channelsService: ChannelsMockService,
+              private _channelsService: ChannelsService,
               private _dialog: MatDialog) {
     this._categoriesService
       .getCategories()
@@ -119,7 +119,8 @@ export class RssChannelsSettingsComponent {
 
   public addChannel(): void {
     const data: IManageRssChannelModalComponentInput = {
-      channel: null
+      channel: null,
+      categoryID: this.currentCategory.id
     };
 
     const dialogRef = this._dialog.open(ManageRssChannelModalComponent, {
@@ -140,7 +141,8 @@ export class RssChannelsSettingsComponent {
     }
 
     const data: IManageRssChannelModalComponentInput = {
-      channel: Object.assign({}, this.currentChannel)
+      channel: Object.assign({}, this.currentChannel),
+      categoryID: this.currentCategory.id
     };
 
     const dialogRef = this._dialog.open(ManageRssChannelModalComponent, {

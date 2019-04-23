@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {ICategoriesGroup} from '../../interfaces/categories-group.interface';
-import {CategoriesMockService} from '../../services/categories-mock.service';
 import {ICategory} from '../../interfaces/category.interface';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {NotificationService} from '../../../core/services/notification.service';
+import {CategoriesService} from '../../services/categories.service';
 
 @Component({
   selector: 'app-categories-list',
@@ -25,7 +25,7 @@ export class CategoriesListComponent {
   public isLoading: boolean = true;
   public errorOccurred: boolean = false;
 
-  constructor(private _categoriesService: CategoriesMockService,
+  constructor(private _categoriesService: CategoriesService,
               private _notificationService: NotificationService) {
     this._categoriesService
       .getCategories()

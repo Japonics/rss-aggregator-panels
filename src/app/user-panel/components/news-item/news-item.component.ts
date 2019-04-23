@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {INews} from '../../interfaces/news.interface';
 import {DomSanitizer, SafeStyle} from '@angular/platform-browser';
-import {NewsMockService} from '../../services/news-mock.service';
 import {NotificationService} from '../../../core/services/notification.service';
+import {NewsService} from '../../services/news.service';
 
 @Component({
   selector: 'app-news-item',
@@ -18,7 +18,7 @@ export class NewsItemComponent {
 
   constructor(private _domSanitizer: DomSanitizer,
               private _notificationService: NotificationService,
-              private _newsService: NewsMockService) {
+              private _newsService: NewsService) {
   }
 
   public openNews(): void {

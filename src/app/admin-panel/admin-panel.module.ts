@@ -17,13 +17,10 @@ import {RouterModule} from '@angular/router';
 import {ManageCategoryModalComponent} from './components/manage-category-modal/manage-category-modal.component';
 import {ManageRssChannelModalComponent} from './components/manage-rss-channel-modal/manage-rss-channel-modal.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {CategoriesMockService} from './services/categories-mock.service';
 import {CategoriesService} from './services/categories.service';
 import {OthersSettingsComponent} from './components/others-settings/others-settings.component';
-import {SettingsMockService} from './services/settings-mock.service';
 import {SettingsService} from './services/settings.service';
 import {ChannelsService} from './services/channels.service';
-import {ChannelsMockService} from './services/channels-mock.service';
 
 @NgModule({
   imports: [
@@ -42,12 +39,9 @@ import {ChannelsMockService} from './services/channels-mock.service';
     MatSelectModule
   ],
   providers: [
-    CategoriesMockService,
     CategoriesService,
-    SettingsMockService,
     SettingsService,
     ChannelsService,
-    ChannelsMockService
   ],
   declarations: [
     AdminPanelOutletComponent,

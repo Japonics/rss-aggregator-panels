@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {ICategory} from '../interfaces/category.interface';
 import {catchError, map} from 'rxjs/operators';
 import {ICategoriesService} from '../interfaces/categories-service.interface';
@@ -21,26 +21,27 @@ export class CategoriesService implements ICategoriesService {
         map((response: ICategoryDto[]) => {
           return response.map(item => {
             return {
-              id: item.id,
+              id: item._id,
               image: item.image,
               title: item.title,
               color: item.color,
               channels: item.channels.map((channel: IRssChannelDto) => {
                 return {
                   source: channel.source,
-                  id: channel.id
+                  id: channel._id,
+                  category_id: channel.category_id
                 };
               })
             };
           });
         }),
-        catchError(err => err)
+        catchError(err => throwError(err.error.message))
       );
   }
 
   public createCategory(category: ICategory): Observable<ICategory> {
     const categoryDto: ICategoryDto = {
-      id: null,
+      _id: null,
       title: category.title,
       image: category.image,
       channels: [],
@@ -52,20 +53,20 @@ export class CategoriesService implements ICategoriesService {
       .pipe<ICategory, any>(
         map((item: ICategoryDto) => {
           return {
-            id: item.id,
+            id: item._id,
             image: item.image,
             title: item.title,
             channels: [],
             color: item.color
           };
         }),
-        catchError(err => err)
+        catchError(err => throwError(err.error.message))
       );
   }
 
   public updateCategory(category: ICategory): Observable<ICategory> {
     const categoryDto: ICategoryDto = {
-      id: category.id,
+      _id: category.id,
       title: category.title,
       image: category.image,
       channels: [],
@@ -73,18 +74,18 @@ export class CategoriesService implements ICategoriesService {
     };
 
     return this._httpService
-      .put(CATEGORIES_ROUTES.updateCategoryRoute(categoryDto.id), categoryDto)
+      .put(CATEGORIES_ROUTES.updateCategoryRoute(categoryDto._id), categoryDto)
       .pipe<ICategory, any>(
         map((item: ICategoryDto) => {
           return {
-            id: item.id,
+            id: item._id,
             image: item.image,
             title: item.title,
             channels: [],
             color: item.color
           };
         }),
-        catchError(err => err)
+        catchError(err => throwError(err.error.message))
       );
   }
 
@@ -93,7 +94,7 @@ export class CategoriesService implements ICategoriesService {
       .delete(CATEGORIES_ROUTES.deleteCategoryRoute(categoryID))
       .pipe(
         map(item => item),
-        catchError(err => err)
+        catchError(err => throwError(err.error.message))
       );
   }
 }

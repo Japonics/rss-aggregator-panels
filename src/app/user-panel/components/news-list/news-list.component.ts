@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {INews} from '../../interfaces/news.interface';
-import {NewsMockService} from '../../services/news-mock.service';
 import {ActivatedRoute} from '@angular/router';
 import {NEWS_LIST_ANIMATION} from '../../../ui/animations/news-list.animation';
 import {NotificationService} from '../../../core/services/notification.service';
+import {NewsService} from '../../services/news.service';
 
 @Component({
   selector: 'app-news-list',
@@ -18,7 +18,7 @@ export class NewsListComponent {
   public isLoading: boolean = true;
   public errorOccurred: boolean = false;
 
-  constructor(private _newsService: NewsMockService,
+  constructor(private _newsService: NewsService,
               private _notificationService: NotificationService,
               private _activatedRoute: ActivatedRoute) {
     this.categoryID = this._activatedRoute.parent.snapshot.params['id'];

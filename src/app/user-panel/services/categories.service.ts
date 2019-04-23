@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClientService} from '../../core/services/http-client.service';
-import {Observable, of} from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {ICategory} from '../interfaces/category.interface';
 import {ICategoryDto} from '../interfaces/category-dto.interface';
@@ -37,7 +37,7 @@ export class CategoriesService implements ICategoriesService {
 
           return result;
         }),
-        catchError(err => err)
+        catchError(err => throwError(err.error.message))
       );
   }
 }
