@@ -10,32 +10,22 @@ import {CATEGORIES_ROUTES} from './categories.routes';
 @Injectable()
 export class CategoriesService implements ICategoriesService {
 
-  private _storedCategories: ICategory[] = null;
-
   constructor(private _httpClientService: HttpClientService) {
   }
 
   public getCategories(): Observable<ICategory[]> {
-    if (this._storedCategories !== null) {
-      return of(this._storedCategories);
-    }
-
     return this._httpClientService
       .get(CATEGORIES_ROUTES.getCategoriesRoute())
       .pipe<ICategory[], any>(
         map((response: ICategoryDto[]) => {
-          const result = response.map(item => {
+          return response.map(item => {
             return {
-              id: item.id,
+              id: item._id,
               image: item.image,
               title: item.title,
               to_read: item.to_read
             };
           });
-
-          this._storedCategories = result;
-
-          return result;
         }),
         catchError(err => throwError(err.error.message))
       );

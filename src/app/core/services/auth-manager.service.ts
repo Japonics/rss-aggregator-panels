@@ -1,11 +1,16 @@
 import {Injectable} from '@angular/core';
 import {IUser} from '../../auth/interfaces/user.interface';
 import {USER_STORAGE_KEY} from '../types/app.constants';
+import {HttpClientService} from './http-client.service';
 
 @Injectable()
 export class AuthManagerService {
 
   private _user: IUser = null;
+
+  constructor(private _httpClientService: HttpClientService) {
+
+  }
 
   public getUser(): IUser {
     return Object.assign({}, this._user);
@@ -34,6 +39,7 @@ export class AuthManagerService {
       }
 
       this._user = JSON.parse(user);
+      this._httpClientService.loadToken(this._user.id);
       resolve(true);
     }));
   }
@@ -51,7 +57,7 @@ export class AuthManagerService {
         this._user = JSON.parse(user);
       }
 
-      if (this._user.isAdmin) {
+      if (this._user.is_admin) {
         resolve(true);
       }
 

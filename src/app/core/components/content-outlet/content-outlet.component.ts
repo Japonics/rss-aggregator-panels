@@ -23,7 +23,7 @@ export class ContentOutletComponent {
               private _httpClientService: HttpClientService,
               private _router: Router) {
     this.user = this._authManagerService.getUser();
-    this.isAdmin = this.user.isAdmin;
+    this.isAdmin = this.user.is_admin;
 
     this._router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {

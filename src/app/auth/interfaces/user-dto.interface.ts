@@ -1,5 +1,5 @@
 export interface IUserDto {
-  id: string;
+  _id: string;
   username: string;
-  isAdmin: boolean;
+  is_admin: boolean;
 }

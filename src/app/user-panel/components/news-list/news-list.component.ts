@@ -1,9 +1,10 @@
-import {Component} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {INews} from '../../interfaces/news.interface';
 import {ActivatedRoute} from '@angular/router';
 import {NEWS_LIST_ANIMATION} from '../../../ui/animations/news-list.animation';
 import {NotificationService} from '../../../core/services/notification.service';
 import {NewsService} from '../../services/news.service';
+import {CommunicationService} from '../../../core/services/communication.service';
 
 @Component({
   selector: 'app-news-list',
@@ -11,7 +12,7 @@ import {NewsService} from '../../services/news.service';
   styleUrls: ['./news-list.component.scss'],
   animations: NEWS_LIST_ANIMATION
 })
-export class NewsListComponent {
+export class NewsListComponent implements OnInit, OnDestroy {
 
   public news: INews[] = [];
   public categoryID: string;
@@ -19,9 +20,10 @@ export class NewsListComponent {
   public errorOccurred: boolean = false;
 
   constructor(private _newsService: NewsService,
+              private _communicationService: CommunicationService,
               private _notificationService: NotificationService,
               private _activatedRoute: ActivatedRoute) {
-    this.categoryID = this._activatedRoute.parent.snapshot.params['id'];
+    this.categoryID = this._activatedRoute.snapshot.params['id'];
     this._newsService
       .getNews(this.categoryID)
       .subscribe(
@@ -39,6 +41,14 @@ export class NewsListComponent {
           });
         }
       );
+  }
+
+  public ngOnInit(): void {
+    this._communicationService.onNewsRoute.next(true);
+  }
+
+  public ngOnDestroy(): void {
+    this._communicationService.onNewsRoute.next(false);
   }
 
   public onNewsRead(newsID: string): void {

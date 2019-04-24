@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
-import {AuthMockService} from '../../services/auth-mock.service';
 import {ICredentials} from '../../interfaces/credentials.interface';
 import {IUser} from '../../interfaces/user.interface';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthManagerService} from '../../../core/services/auth-manager.service';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-login-form',
@@ -16,7 +16,7 @@ export class LoginFormComponent {
 
   public loginForm: FormGroup;
 
-  constructor(private _authService: AuthMockService,
+  constructor(private _authService: AuthService,
               private _authManagerService: AuthManagerService,
               private _snackBar: MatSnackBar,
               private _router: Router) {
@@ -40,6 +40,7 @@ export class LoginFormComponent {
       .subscribe(
         (user: IUser) => {
           this._authManagerService.loginUser(user);
+          this._authService.loadToken(user.id);
           this._router.navigate(['/']).then(
             () => {
               this._showMessage(`Welcome, ${user.username}`, 'Bye');

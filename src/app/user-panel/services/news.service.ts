@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClientService} from '../../core/services/http-client.service';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {INewsService} from '../interfaces/news-service.interface';
 import {INews} from '../interfaces/news.interface';
@@ -20,14 +20,14 @@ export class NewsService implements INewsService {
         map((response: INewsDto[]) => {
           return response.map(item => {
             return {
-              id: item.id,
+              id: item._id,
               category_id: item.category_id,
               title: item.title,
               description: item.description,
               date: item.date,
               image: item.image,
-              is_favorite: false,
-              read: false,
+              is_favorite: item.is_favorite,
+              read: item.read,
               source: item.source
             };
           });
@@ -41,7 +41,7 @@ export class NewsService implements INewsService {
       .put(NEWS_ROUTES.markAsReadRoute(newsID), {})
       .pipe(
         map(item => item),
-        catchError(err => err)
+        catchError(err => throwError(err.error.message))
       );
   }
 
@@ -50,7 +50,7 @@ export class NewsService implements INewsService {
       .put(NEWS_ROUTES.markAsFavoriteRoute(newsID), {})
       .pipe(
         map(item => item),
-        catchError(err => err)
+        catchError(err => throwError(err.error.message))
       );
   }
 
@@ -59,7 +59,7 @@ export class NewsService implements INewsService {
       .delete(NEWS_ROUTES.removeAsFavoriteRoute(newsID))
       .pipe(
         map(item => item),
-        catchError(err => err)
+        catchError(err => throwError(err.error.message))
       );
   }
 
@@ -70,19 +70,19 @@ export class NewsService implements INewsService {
         map((response: INewsDto[]) => {
           return response.map(item => {
             return {
-              id: item.id,
+              id: item._id,
               category_id: item.category_id,
               title: item.title,
               description: item.description,
               date: item.date,
               image: item.image,
-              is_favorite: false,
-              read: false,
+              is_favorite: item.is_favorite,
+              read: item.read,
               source: item.source
             };
           });
         }),
-        catchError(err => err)
+        catchError(err => throwError(err.error.message))
       );
   }
 }

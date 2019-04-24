@@ -1,5 +1,5 @@
 export interface INewsDto {
-  id: string;
+  _id: string;
   category_id: string;
   title: string;
   description: string;

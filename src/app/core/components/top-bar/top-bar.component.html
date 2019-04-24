@@ -7,4 +7,10 @@
   <p class="top-bar-title">
     RSS aggregator - all you want to know in one place
   </p>
+  <button mat-raised-button class="back-btn" *ngIf="isNewsRoute" [routerLink]="['/']">
+    <mat-icon aria-hidden="false" aria-label="Back" color="accent">
+      arrow_back_ios
+    </mat-icon>
+    Back
+  </button>
 </div>

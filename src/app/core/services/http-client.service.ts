@@ -50,7 +50,7 @@ export class HttpClientService {
 
     return {
       headers: {
-        token: this._token
+        Token: this._token
       }
     };
   }

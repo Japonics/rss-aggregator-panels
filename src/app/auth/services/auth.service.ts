@@ -6,6 +6,7 @@ import {IUser} from '../interfaces/user.interface';
 import {IUserDto} from '../interfaces/user-dto.interface';
 import {ICredentials} from '../interfaces/credentials.interface';
 import {IAuthService} from '../interfaces/auth-service.interface';
+import {AUTH_ROUTES} from './auth.routes';
 
 @Injectable()
 export class AuthService implements IAuthService {
@@ -19,13 +20,13 @@ export class AuthService implements IAuthService {
 
   public login(credentials: ICredentials): Observable<IUser> {
     return this._httpClientService
-      .post('', credentials)
+      .post(AUTH_ROUTES.loginRoute(), credentials)
       .pipe<IUser, any>(
         map((response: IUserDto) => {
           return {
-            id: response.id,
+            id: response._id,
             username: response.username,
-            isAdmin: response.isAdmin
+            is_admin: response.is_admin
           };
         }),
         catchError(err => err)

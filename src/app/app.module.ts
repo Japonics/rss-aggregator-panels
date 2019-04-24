@@ -12,10 +12,11 @@ import {IsAuthorizedGuard} from './core/guards/is-authorized.guard';
 import {AuthManagerService} from './core/services/auth-manager.service';
 import {ContentOutletComponent} from './core/components/content-outlet/content-outlet.component';
 import {TopBarComponent} from './core/components/top-bar/top-bar.component';
-import {MatIconModule, MatSidenavModule} from '@angular/material';
+import {MatButtonModule, MatIconModule, MatSidenavModule} from '@angular/material';
 import {HttpClientService} from './core/services/http-client.service';
 import {NotificationService} from './core/services/notification.service';
 import {HttpClientModule} from '@angular/common/http';
+import {CommunicationService} from './core/services/communication.service';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import {HttpClientModule} from '@angular/common/http';
     UserPanelModule,
     MatSidenavModule,
     MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    MatButtonModule
   ],
   declarations: [
     AppComponent,
@@ -40,7 +42,8 @@ import {HttpClientModule} from '@angular/common/http';
     IsAuthorizedGuard,
     AuthManagerService,
     HttpClientService,
-    NotificationService
+    NotificationService,
+    CommunicationService
   ],
   bootstrap: [
     AppComponent

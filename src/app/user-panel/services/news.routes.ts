@@ -5,13 +5,13 @@ export const NEWS_ROUTES = {
   markAsReadRoute: (newsID: string) => {
     return `/api/news/${newsID}`;
   },
-  markAsFavoriteRoute: (newsID: string) => {
-    return `/api/news/${newsID}`;
-  },
-  removeAsFavoriteRoute: (newsID: string) => {
-    return `/api/news/${newsID}`;
-  },
   getFavoritesNews: () => {
     return `/api/news/favorites`;
-  }
+  },
+  markAsFavoriteRoute: (newsID: string) => {
+    return `/api/news/favorites/${newsID}`;
+  },
+  removeAsFavoriteRoute: (newsID: string) => {
+    return `/api/news/favorites/${newsID}`;
+  },
 };
